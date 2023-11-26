@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote App</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1>Quote of the day</h1>
+        <blockquote id="Quote"> Loading.... </blockquote>
+        <span id="author">Loading....</span>
+        <div></div>
+        <button id="gen" onclick="quots(api)">New Quote</button>
+        <button id="tweet" onclick="tweet()"> <i class='bx bxl-twitter'> Tweet </i></button>
+    </div>
+
+    <script>
+        const api = "https://api.quotable.io/random"
+let quot = document.getElementById("Quote")
+let auts = document.getElementById("author");
+
+        async function quots(url) {
+            const response = await fetch(url);
+            var data = await response.json();
+            quot.innerHTML=data.content
+            auts.innerHTML= data.author
+            
+        }
+        quots(api); 
+        function tweet(){
+            window.open( "https://twitter.com/intent/tweet?text="+ quot.innerHTML +"   ---by  "+auts.innerHTML,"Tweet window","width=600 , height= 400" )
+        }
+       
+
+    </script>
+</body>
+
+</html>
